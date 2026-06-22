@@ -39,14 +39,14 @@ const SALES_EMAIL = "jhaladevrajsinh11@gmail.com";
 const SALES_LINK = `mailto:${SALES_EMAIL}?subject=${encodeURIComponent(
   "AgentReady agency access",
 )}&body=${encodeURIComponent(
-  "Hi Devrajsinh,\n\nI’d like to learn more about using AgentReady for our websites.\n\nAgency/company:\nNumber of sites:\nMain goal:\n",
+  "Hi Devrajsinh,\n\nIâ€™d like to learn more about using AgentReady for our websites.\n\nAgency/company:\nNumber of sites:\nMain goal:\n",
 )}`;
 
 const features = [
   {
     icon: ScanSearch,
     title: "Crawl with intent",
-    body: "Find the pages that actually explain a business—not every forgotten tag archive and campaign URL.",
+    body: "Find the pages that actually explain a businessâ€”not every forgotten tag archive and campaign URL.",
     color: "bg-teal-50 text-teal-700",
   },
   {
@@ -58,13 +58,13 @@ const features = [
   {
     icon: Gauge,
     title: "See context limits",
-    body: "Know what fits at 8K, 32K, and 128K—and exactly which useful pages fall beyond the cutoff.",
+    body: "Know what fits at 8K, 32K, and 128Kâ€”and exactly which useful pages fall beyond the cutoff.",
     color: "bg-amber-50 text-amber-700",
   },
   {
     icon: Activity,
     title: "Monitor every week",
-    body: "Get notified when important pages disappear, links break, or a client’s AI-ready footprint quietly changes.",
+    body: "Get notified when important pages disappear, links break, or a clientâ€™s AI-ready footprint quietly changes.",
     color: "bg-rose-50 text-rose-700",
   },
   {
@@ -107,12 +107,12 @@ const findings = [
 
 function Logo() {
   return (
-    <a href="#top" className="flex items-center gap-2.5" aria-label="AgentReady home">
-      <span className="relative grid size-9 place-items-center overflow-hidden rounded-xl bg-slate-950 text-white shadow-sm">
-        <Radar className="size-[19px]" strokeWidth={2.2} />
-        <span className="absolute right-1.5 top-1.5 size-1.5 rounded-full bg-teal-300" />
+    <a href="#top" className="group flex items-center gap-2.5" aria-label="AgentReady home">
+      <span className="relative grid size-10 place-items-center overflow-hidden rounded-[14px] bg-slate-950 text-white shadow-sm transition-transform duration-200 group-hover:-translate-y-0.5">
+        <Radar className="size-5" strokeWidth={2.2} />
+        <span className="absolute right-1.5 top-1.5 size-2 rounded-full border-2 border-slate-950 bg-teal-300" />
       </span>
-      <span className="text-[17px] font-bold tracking-[-0.03em]">AgentReady</span>
+      <span className="text-lg font-bold tracking-[-0.035em]">AgentReady</span>
     </a>
   );
 }
@@ -140,30 +140,33 @@ function ContactButton({
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const links = [
+    ["Product", "#product"],
+    ["How it works", "#workflow"],
+    ["For agencies", "#agencies"],
+    ["Access", "#access"],
+  ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 shadow-[0_1px_12px_rgba(15,23,42,0.035)] backdrop-blur-xl">
       <div className="container flex h-[72px] items-center justify-between">
         <Logo />
-        <nav className="hidden items-center gap-7 text-sm font-medium text-slate-600 md:flex">
-          <a className="transition-colors hover:text-slate-950" href="#product">Product</a>
-          <a className="transition-colors hover:text-slate-950" href="#workflow">How it works</a>
-          <a className="transition-colors hover:text-slate-950" href="#agencies">For agencies</a>
-          <a className="transition-colors hover:text-slate-950" href="#access">Access</a>
-          <a className="transition-colors hover:text-slate-950" href="/login">Sign in</a>
+        <nav className="hidden items-center gap-1 rounded-2xl border border-slate-200/80 bg-slate-50/80 p-1 text-sm font-semibold text-slate-600 lg:flex">
+          {links.map(([label, href]) => (
+            <a key={href} href={href} className="rounded-xl px-3.5 py-2 transition-all hover:bg-white hover:text-slate-950 hover:shadow-sm">
+              {label}
+            </a>
+          ))}
         </nav>
-        <div className="hidden items-center gap-3 md:flex">
-          <a
-            href={`mailto:${SALES_EMAIL}`}
-            className="px-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-950"
-          >
-            {SALES_EMAIL}
-          </a>
-          <ContactButton size="sm" />
+        <div className="hidden items-center gap-1.5 lg:flex">
+          <Button asChild variant="ghost" size="sm" className="rounded-xl px-4 font-semibold">
+            <a href="/login">Sign in</a>
+          </Button>
+          <ContactButton size="sm" className="h-10 rounded-xl px-5 shadow-lg shadow-slate-950/10" />
         </div>
         <Button
-          className="md:hidden"
-          variant="ghost"
+          className="rounded-xl lg:hidden"
+          variant="outline"
           size="icon"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((value) => !value)}
@@ -172,25 +175,18 @@ function Header() {
         </Button>
       </div>
       {open ? (
-        <div className="border-t bg-white px-5 py-5 md:hidden">
-          <nav className="flex flex-col gap-4 text-sm font-medium">
-            {[
-              ["Product", "#product"],
-              ["How it works", "#workflow"],
-              ["For agencies", "#agencies"],
-              ["Access", "#access"],
-              ["Sign in", "/login"],
-            ].map(([label, href]) => (
-              <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
+        <div className="border-t border-slate-200/70 bg-white/95 px-5 py-4 shadow-lg lg:hidden">
+          <nav className="mx-auto flex max-w-lg flex-col gap-1 text-sm font-semibold text-slate-700">
+            {[...links, ["Sign in", "/login"]].map(([label, href]) => (
+              <a key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-3 py-2.5 transition-colors hover:bg-slate-50 hover:text-slate-950">{label}</a>
             ))}
-            <ContactButton className="mt-2 w-full" />
+            <ContactButton className="mt-3 w-full rounded-xl" />
           </nav>
         </div>
       ) : null}
     </header>
   );
 }
-
 function DashboardPreview() {
   const [active, setActive] = useState<"overview" | "findings">("overview");
 
@@ -258,7 +254,7 @@ function DashboardPreview() {
                 ].map(([label, value, note], index) => (
                   <div key={label} className="rounded-xl border bg-white p-4 shadow-sm">
                     <div className="text-[11px] font-medium text-slate-500">{label}</div>
-                    <div className="mt-2 flex items-baseline justify-between gap-2"><span className="text-2xl font-bold tracking-tight">{value}</span>{index === 0 ? <span className="text-xs font-semibold text-emerald-600">↑ 8%</span> : null}</div>
+                    <div className="mt-2 flex items-baseline justify-between gap-2"><span className="text-2xl font-bold tracking-tight">{value}</span>{index === 0 ? <span className="text-xs font-semibold text-emerald-600">â†‘ 8%</span> : null}</div>
                     <div className="mt-2 text-[10px] text-slate-400">{note}</div>
                   </div>
                 ))}
@@ -331,7 +327,7 @@ export function MarketingSite() {
               Make every client site legible to AI.
             </h1>
             <p className="text-balance mx-auto mt-6 max-w-[620px] text-base leading-7 text-slate-600 sm:text-lg lg:mx-0">
-              Generate, validate, and monitor <span className="font-semibold text-slate-900">llms.txt</span>—with transparent context budgets and reports your clients can actually understand.
+              Generate, validate, and monitor <span className="font-semibold text-slate-900">llms.txt</span>â€”with transparent context budgets and reports your clients can actually understand.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
               <a href="#product"><Button size="lg" className="w-full sm:w-auto">Explore the product <ArrowRight className="size-4" /></Button></a>
@@ -360,8 +356,8 @@ export function MarketingSite() {
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
             <Badge variant="secondary" className="mb-4">The full signal</Badge>
-            <h2 className="text-balance text-3xl font-bold tracking-[-0.04em] sm:text-5xl">From “we added a file” to a system you can manage.</h2>
-            <p className="mt-5 text-base leading-7 text-slate-600">AgentReady turns a fuzzy new standard into a repeatable agency service—with traceable recommendations and visible progress.</p>
+            <h2 className="text-balance text-3xl font-bold tracking-[-0.04em] sm:text-5xl">From â€œwe added a fileâ€ to a system you can manage.</h2>
+            <p className="mt-5 text-base leading-7 text-slate-600">AgentReady turns a fuzzy new standard into a repeatable agency serviceâ€”with traceable recommendations and visible progress.</p>
           </div>
           <div className="mt-14"><DashboardPreview /></div>
         </div>
@@ -397,7 +393,7 @@ export function MarketingSite() {
             <div>
               <Badge className="mb-5 border-white/10 bg-white/10 text-white">For modern SEO agencies</Badge>
               <h2 className="text-balance text-3xl font-bold tracking-[-0.045em] sm:text-5xl">Turn AI readiness into a service clients can see.</h2>
-              <p className="mt-5 max-w-xl text-base leading-7 text-slate-300">Bring every site into one workspace, attach your brand to the report, and make next month’s progress obvious.</p>
+              <p className="mt-5 max-w-xl text-base leading-7 text-slate-300">Bring every site into one workspace, attach your brand to the report, and make next monthâ€™s progress obvious.</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <ContactButton size="lg" className="bg-white text-slate-950 hover:bg-slate-100">Request agency access</ContactButton>
                 <Button asChild size="lg" variant="ghost" className="text-white hover:bg-white/10 hover:text-white"><a href={`mailto:${SALES_EMAIL}`}><Mail className="size-4" /> Email directly</a></Button>
@@ -422,8 +418,8 @@ export function MarketingSite() {
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <Badge variant="success" className="mb-4">Founding access</Badge>
-            <h2 className="text-balance text-3xl font-bold tracking-[-0.04em] sm:text-5xl">Let’s see if it fits your agency.</h2>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600">No checkout maze. Tell us how many sites you manage and what you want to improve. We’ll reply personally with access, scope, and pricing.</p>
+            <h2 className="text-balance text-3xl font-bold tracking-[-0.04em] sm:text-5xl">Letâ€™s see if it fits your agency.</h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-600">No checkout maze. Tell us how many sites you manage and what you want to improve. Weâ€™ll reply personally with access, scope, and pricing.</p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <ContactButton size="lg">Contact sales by email</ContactButton>
               <Button asChild variant="outline" size="lg"><a href={`mailto:${SALES_EMAIL}`}><Mail className="size-4" /> {SALES_EMAIL}</a></Button>
@@ -443,7 +439,7 @@ export function MarketingSite() {
             <a href="#workflow" className="hover:text-slate-950">How it works</a>
             <a href={SALES_LINK} className="hover:text-slate-950">Contact</a>
           </div>
-          <p className="text-xs text-slate-400">© {new Date().getFullYear()} AgentReady</p>
+          <p className="text-xs text-slate-400">Â© {new Date().getFullYear()} AgentReady</p>
         </div>
       </footer>
     </main>
